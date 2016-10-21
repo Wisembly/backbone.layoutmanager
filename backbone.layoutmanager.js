@@ -730,8 +730,9 @@ var LayoutManager = Backbone.View.extend({
 
     // Iterate over all of the nested View's and remove.
     root.getViews().each(function(view) {
+      var manager = view.__manager__;
       // Force doesn't care about if a View has rendered or not.
-      if (view.hasRendered || force) {
+      if (view.hasRendered || manager.renderInProgress || force) {
         LayoutManager._removeView(view, force);
       }
 
